@@ -75,32 +75,36 @@ wezterm.on("update-status", function(window, pane)
   local bg_color = "#a6e3a1" -- Green
   local fg_color = "#11111b"
 
-  if key_table then
-    if key_table == "locked" then
-      mode_text = " LOCKED "
-      bg_color = "#f38ba8" -- Red
-    elseif key_table == "pane" then
-      mode_text = " PANE "
-      bg_color = "#cdd6f4" -- Lavender
-    elseif key_table == "tab" then
-      mode_text = " TAB "
-      bg_color = "#f9e2af" -- Yellow
-    elseif key_table == "resize" then
-      mode_text = " RESIZE "
-      bg_color = "#f5c2e7" -- Pink
-    elseif key_table == "move" then
-      mode_text = " MOVE "
-      bg_color = "#89b4fa" -- Blue
-    elseif key_table == "scroll" then
-      mode_text = " SCROLL "
-      bg_color = "#fab387" -- Orange
-    elseif key_table == "session" then
-      mode_text = " SESSION "
-      bg_color = "#94e2d5" -- Teal
-    elseif key_table == "tmux" then
-      mode_text = " TMUX "
-      bg_color = "#cba6f7" -- Purple
-    end
+  if key_table == "locked" then
+    mode_text = " LOCKED "
+    bg_color = "#f38ba8" -- Red
+  elseif key_table == "pane" then
+    mode_text = " PANE "
+    bg_color = "#cdd6f4" -- Lavender
+  elseif key_table == "tab" then
+    mode_text = " TAB "
+    bg_color = "#f9e2af" -- Yellow
+  elseif key_table == "resize" then
+    mode_text = " RESIZE "
+    bg_color = "#f5c2e7" -- Pink
+  elseif key_table == "move" then
+    mode_text = " MOVE "
+    bg_color = "#89b4fa" -- Blue
+  elseif key_table == "scroll" or key_table == "copy_mode" then
+    mode_text = " SCROLL "
+    bg_color = "#fab387" -- Orange
+  elseif key_table == "search_mode" then
+    mode_text = " SEARCH "
+    bg_color = "#f9e2af" -- Yellow
+  elseif key_table == "session" then
+    mode_text = " SESSION "
+    bg_color = "#94e2d5" -- Teal
+  elseif key_table == "tmux" then
+    mode_text = " TMUX "
+    bg_color = "#cba6f7" -- Purple
+  elseif pane:get_title():find("Copy Mode") or pane:get_title():find("Search Mode") then
+    mode_text = " SCROLL "
+    bg_color = "#fab387" -- Orange
   end
 
   window:set_left_status(wezterm.format({
